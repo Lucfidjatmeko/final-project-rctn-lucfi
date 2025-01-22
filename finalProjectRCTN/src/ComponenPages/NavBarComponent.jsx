@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { apiGetMoviesNowPlaying, apiGetMoviesSearchMovie } from "../store/action";
-
+ 
 export default function NavbarComponent() {
     const dispatch = useDispatch();
     const [searchQuery, setSearchQuery] = useState("");  // State untuk menyimpan query pencarian
-
+ 
     const handleSelect = (e) => {
         console.log(e.target.value, "==> ini pilihan");
         dispatch(apiGetMoviesNowPlaying(e.target.value));
     };
-
+ 
     // Fungsi untuk menangani perubahan input pencarian
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
     };
-
+ 
     // Fungsi untuk menangani pencarian
     const handleSearch = () => {
         if (searchQuery.trim() !== "") {
@@ -23,7 +23,7 @@ export default function NavbarComponent() {
             dispatch(apiGetMoviesSearchMovie(searchQuery));  // Mengirim pencarian ke action
         }
     };
-
+ 
     return (
         <nav className="navbar navbar-expand-lg bg-body-tertiary">
             <div className="container-fluid">

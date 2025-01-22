@@ -1,37 +1,45 @@
-import React, { useEffect, useState } from "react";
-// import { useSelector, useDispatch } from "react-redux";
-// import { apiGetMoviesNowPlaying } from "../store/action";
-import CardComponent from "../ComponenPages/CardComponent";
- 
- 
+import React, {useEffect, useState} from "react"
+import {useSelector, useDispatch} from "react-redux"
+import { apiGetMoviesNowPlaying, apiGetMoviesSearchMovie } from "../store/action"
+import CardComponent from "../ComponenPages/CardComponent"
  
 export default function HomePage(){
-//    const dataCoba = useSelector(state => state.dataCoba)
-//    const dataMovies = useSelector(state => state.dataMovies)
-//    const dispatch = useDispatch()
  
-//    console.log(data);
-   
+ const dataMovies = useSelector(state => state.dataMovies)  
+ const dispatch = useDispatch()
  
-    // useEffect(() => {
-    //     dispatch(apiGetMoviesNowPlaying())
+ console.log(dataMovies,"<==data dari reducer");
  
-    // },[])
  
-    return (        
+  useEffect(() => {
+        dispatch(apiGetMoviesNowPlaying())
  
-    <>
-   
-    <h1>This is Home page Movie </h1>
-
- <CardComponent/>
-   
-   
-    </>
+    },[])
+ 
+ 
+     return (      
+     <>
+       <h1>MOVIE HOME PAGE</h1>
+           {/* <p>{JSON.stringify(dataMovies)}</p> */}
+       
+           <div className="row">
+           {/* <CardComponent/>  */}
+               {
+       
+                   dataMovies.map(el => (
+                   <>      
+                     
+                   <CardComponent key={el.id} id={el.id} original_title={el.original_title} popularity={el.popularity} poster_path={el.poster_path} overview={el.overview} />
+                 
+                   </>  
+                   ))
+               }
+           </div>
+           
      
+     </>    
+ 
+     )
  
  
-    )
- 
- 
-}
+ }
